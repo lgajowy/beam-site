@@ -159,7 +159,7 @@ Example run with the direct runner:
 
 Example run with the Cloud Dataflow runner:
 ```
-/gradlew performanceTest -DpkbLocation="/Users/me/PerfKitBenchmarker/pkb.py" -DintegrationTestPipelineOptions='["--numberOfRecords=1000", "--project=GOOGLE_CLOUD_PROJECT", "--tempRoot=GOOGLE_STORAGE_BUCKET"]' -DitModule=sdks/java/io/jdbc/ -DintegrationTest=org.apache.beam.sdk.io.jdbc.JdbcIOIT -DkubernetesScripts="/Users/me/beam/.test-infra/kubernetes/postgres/postgres-service-for-local-dev.yml" -DbeamITOptions="/Users/me/beam/.test-infra/kubernetes/postgres/pkb-config-local.yml" -DintegrationTestRunner=dataflow
+./gradlew performanceTest -DpkbLocation="/Users/me/PerfKitBenchmarker/pkb.py" -DintegrationTestPipelineOptions='["--numberOfRecords=1000", "--project=GOOGLE_CLOUD_PROJECT", "--tempRoot=GOOGLE_STORAGE_BUCKET"]' -DitModule=sdks/java/io/jdbc/ -DintegrationTest=org.apache.beam.sdk.io.jdbc.JdbcIOIT -DkubernetesScripts="/Users/me/beam/.test-infra/kubernetes/postgres/postgres-service-for-local-dev.yml" -DbeamITOptions="/Users/me/beam/.test-infra/kubernetes/postgres/pkb-config-local.yml" -DintegrationTestRunner=dataflow
 ```
 
 
@@ -218,6 +218,12 @@ Parameter descriptions:
       <td>-DintegrationTestRunner
       </td>
       <td>Runner to be used for running the test. Currently possible options are: direct, dataflow.
+      </td>
+    </tr>
+    <tr>
+      <td>-Dfilesystem
+      </td>
+      <td>Filesystem to be used for running the test. Currently possible options are: gcs, hdfs. NOTE: this is only needed for file-based tests. If not provided, local filesystem will be used.
       </td>
     </tr>
   </tbody>
@@ -532,6 +538,26 @@ In most cases, to run the _performanceTest_ task it is sufficient to pass the pr
      <td>kubectl
      </td>
      <td>Path to kubernetes executable.
+     </td>
+    </tr>
+    <tr>
+     <td>beam_runner
+     </td>
+     <td>-DintegrationTestRunner
+     </td>
+     <td>dataflow
+     </td>
+     <td>Runner to be used to run the Benchmark. Currently supported runners: direct, dataflow.
+     </td>
+    </tr>
+    <tr>
+     <td>beam_filesystem
+     </td>
+     <td>-Dfilesystem
+     </td>
+     <td>N/A
+     </td>
+     <td>Filesystem to be used to run the Benchmark. If not specified, local filesystem will be used. Currently supported filesystems: local, gcs, hdfs.
      </td>
     </tr>
     <tr>
